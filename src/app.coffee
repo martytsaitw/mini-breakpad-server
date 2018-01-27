@@ -38,6 +38,10 @@ app.post '/post', (req, res, next) ->
     res.send path.basename(filename)
     res.end()
 
+healthCheckPath = process.env.MINI_BREAKPAD_SERVER_HEALTH_CHECK_PATH ? '/ping'
+app.get healthCheckPath, (req, res, next) ->
+  res.send 200
+
 root =
   if process.env.MINI_BREAKPAD_SERVER_ROOT?
     "#{process.env.MINI_BREAKPAD_SERVER_ROOT}/"
